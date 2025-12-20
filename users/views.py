@@ -42,7 +42,7 @@ class UserRegistrationView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# ======= ავტორიზაცია =======
+
 class UserLoginView(APIView):
 
     permission_classes = []
@@ -170,7 +170,6 @@ class PasswordResetRequestView(APIView):
 
 
 class PasswordResetConfirmView(APIView):
-    """POST /api/auth/password-reset-confirm/ - ახალი პაროლის დაყენება"""
     permission_classes = []
 
     def post(self, request):
@@ -197,7 +196,6 @@ class PasswordResetConfirmView(APIView):
 
 
 class PasswordChangeView(APIView):
-    """POST /api/auth/change-password/ - პაროლის შეცვლა"""
 
     def post(self, request):
         serializer = PasswordChangeSerializer(
