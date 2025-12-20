@@ -17,17 +17,18 @@ from .serializers import (
 from .permissions import IsAdmin, IsOwnerOrAdmin
 
 
-
+#momxmareblis registracia
 class UserRegistrationView(APIView):
     permission_classes = []
 
     def post(self, request):
+        #POST /api/auth/register/
         serializer = UserRegistrationSerializer(data=request.data)
 
         if serializer.is_valid():
             user = serializer.save()
 
-
+            #JWT Token - ების გენერაცია
             refresh = RefreshToken.for_user(user)
 
             return Response({
@@ -42,7 +43,7 @@ class UserRegistrationView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
+#avtorizacia
 class UserLoginView(APIView):
 
     permission_classes = []
@@ -69,9 +70,7 @@ class UserLoginView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# ======= გასვლა =======
 class UserLogoutView(APIView):
-
 
     def post(self, request):
         try:
@@ -100,11 +99,7 @@ class UserListView(generics.ListAPIView):
 
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    GET /api/users/{id}/ - ნახვა
-    PUT /api/users/{id}/ - რედაქტირება
-    DELETE /api/users/{id}/ - წაშლა
-    """
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsOwnerOrAdmin]
@@ -192,8 +187,6 @@ class PasswordResetConfirmView(APIView):
             }, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 
 class PasswordChangeView(APIView):
 
