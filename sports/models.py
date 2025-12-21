@@ -3,7 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from users.models import User
 
 
-# ======= სპორტი =======
+
+#სპორტი
 class Sport(models.Model):
     #სპორტის ტიპები: BOX, MMA, BJJ ...
 
@@ -140,7 +141,7 @@ class Enrollment(models.Model):
         return f"{self.user.get_full_name()} - {self.training.title}"
 
 
-# ======= საწევროს პაკეტი =======
+#საწევროს პაკეტი
 class MembershipPlan(models.Model):
     """საწევროს პაკეტები (ბრინჯაო, ვერცხლი, ოქრო)"""
 

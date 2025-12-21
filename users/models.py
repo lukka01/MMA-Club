@@ -36,7 +36,7 @@ class User(AbstractUser):
 
     class Meta:
         verbose_name = "წევრი",
-        verbose_name_for_many = "წევრები"
+        verbose_name_plural = "წევრები"
         ordering = ['-created_at']
 
     def __str__(self):
