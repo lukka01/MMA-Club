@@ -43,9 +43,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'MMA_Club.urls'
 
-Templates = [
+TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # ეს ხაზი მნიშვნელოვანია!
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
