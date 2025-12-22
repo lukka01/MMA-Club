@@ -22,7 +22,7 @@ API Endpoints
 ✅ პაროლის აღდგენა Email-ით
 ✅ პაროლის შეცვლა
 
- სპორტები და ვარჯიშები 🥊
+ სპორტები და ვარჯიშები 
 
 ✅ სპორტების CRUD (MMA, BJJ, ბოქსი და ა.შ.)
 ✅ ვარჯიშების შექმნა და მართვა
@@ -30,20 +30,20 @@ API Endpoints
 ✅ მონაწილეთა ლიმიტი
 ✅ მომავალი ვარჯიშების სია
 
- ჩაწერების სისტემა 📝:
+ ჩაწერების სისტემა :
 
 ✅ ვარჯიშებზე ჩაწერა/გაუქმება
 ✅ ადგილების ხელმისაწვდომობის შემოწმება
 ✅ ჩაწერების ისტორია
 ✅ დასწრების აღრიცხვა
 
-  საწევროს მართვა 💳: 
+  საწევროს მართვა : 
 
 ✅ საწევროს პაკეტები (ბრინჯაო, ვერცხლი, ოქრო)
 ✅ საწევროს პერიოდი და ავტომატური განახლება
 ✅ ვარჯიშების რაოდენობის კონტროლი
 
- უსაფრთხოება 🔐:
+ უსაფრთხოება :
 
 ✅ JWT Token Authentication
 ✅ Role-based Access Control
@@ -107,23 +107,23 @@ Email: admin@mmaclub.ge
 Password: admin123 (ან რაც გინდათ)
 
 
-🚀 პროექტის გაშვება
+ პროექტის გაშვება:
 Local გაშვება
 bashpython manage.py runserver
 პროექტი ხელმისაწვდომი იქნება:
 
-🌐 API Documentation: http://localhost:8000/
-📚 Swagger UI: http://localhost:8000/swagger/
-📖 ReDoc: http://localhost:8000/redoc/
-🎨 Admin Panel: http://localhost:8000/admin/
+ API Documentation: http://localhost:8000/
+ Swagger UI: http://localhost:8000/swagger/
+ ReDoc: http://localhost:8000/redoc/
+ Admin Panel: http://localhost:8000/admin/
 
 
-🧪 API ტესტირება
+ API ტესტირება
 Swagger UI-ით ტესტირება
 Swagger-ი საუკეთესო ხერხია API-ს სატესტად. გახსენით:
 http://localhost:8000/swagger/
 
-📍 ნაბიჯ-ნაბიჯ ტესტირება
+ ნაბიჯ-ნაბიჯ ტესტირება
 1️⃣ რეგისტრაცია
 Endpoint: POST /api/auth/register/
 
@@ -236,7 +236,7 @@ Save
 
 6️⃣ ვარჯიშის შექმნა
 Endpoint: POST /api/trainings/
-🔒 საჭიროა: Coach ან Admin როლი
+ საჭიროა: Coach ან Admin როლი
 json{
   "sport": 1,
   "title": "MMA საწყისი დონე",
@@ -383,7 +383,7 @@ Response:
 json{
   "message": "პაროლის აღდგენის ინსტრუქცია გაიგზავნა თქვენს ელ-ფოსტაზე"
 }
-💡 Console-ში დაინახავთ email-ს reset token-ით
+ Console-ში დაინახავთ email-ს reset token-ით  
 
 ნაბიჯი 2: პაროლის შეცვლა
 Endpoint: POST /api/auth/password-reset-confirm/
@@ -433,6 +433,21 @@ GET /api/trainings/?ordering=date
 GET /api/trainings/?ordering=-date  (დაბლოსკენ)
 კომბინირებული:
 GET /api/trainings/?sport=1&difficulty=beginner&ordering=date
+
+API endpoints ტესტირება Postman ან curl:
+# Register
+curl -X POST http://localhost:8000/api/auth/register/ \
+  -H "Content-Type: application/json" \
+  -d '{"username":"test","email":"test@test.com","password":"Pass123!","password_confirm":"Pass123!","first_name":"Test","last_name":"User"}'
+
+# Login
+curl -X POST http://localhost:8000/api/auth/login/ \
+  -H "Content-Type: application/json" \
+  -d '{"username":"test","password":"Pass123!"}'
+
+# Get Sports (with token)
+curl http://localhost:8000/api/sports/ \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 
 🐳 Docker-ით გაშვება
 Development Mode
@@ -490,21 +505,20 @@ docker-compose down -v
 docker-compose build --no-cache
 docker-compose up
 
-📚 API Endpoints
-🔐 Authentication
+   API Endpoints   Authentication
 MethodEndpointDescriptionAuthPOST/api/auth/register/რეგისტრაცია❌POST/api/auth/login/ავტორიზაცია❌POST/api/auth/logout/გასვლა✅POST/api/auth/token/refresh/Token განახლება❌POST/api/auth/password-reset/პაროლის აღდგენა❌POST/api/auth/password-reset-confirm/პაროლის შეცვლა❌POST/api/auth/change-password/პაროლის შეცვლა✅
-👥 Users
+   Users
 MethodEndpointDescriptionRoleGET/api/auth/users/მომხმარებლების სიაAdminGET/api/auth/users/me/ჩემი პროფილიAnyPUT/api/auth/users/me/პროფილის რედაქტირებაAnyGET/api/auth/users/{id}/მომხმარებლის დეტალებიOwner/AdminPUT/api/auth/users/{id}/მომხმარებლის რედაქტირებაOwner/AdminDELETE/api/auth/users/{id}/მომხმარებლის წაშლაAdmin
-🥋 Sports
+   Sports
 MethodEndpointDescriptionRoleGET/api/sports/სპორტების სიაAnyPOST/api/sports/სპორტის დამატებაAdminGET/api/sports/{id}/სპორტის დეტალებიAnyPUT/api/sports/{id}/სპორტის განახლებაAdminDELETE/api/sports/{id}/სპორტის წაშლაAdmin
-💪 Trainings
+   Trainings
 MethodEndpointDescriptionRoleGET/api/trainings/ვარჯიშების სიაAnyPOST/api/trainings/ვარჯიშის შექმნაAdmin/CoachGET/api/trainings/upcoming/მომავალი ვარჯიშებიAnyGET/api/trainings/my-trainings/ჩემი ვარჯიშები (coach)CoachGET/api/trainings/{id}/ვარჯიშის დეტალებიAnyPUT/api/trainings/{id}/ვარჯიშის განახლებაAdmin/CoachDELETE/api/trainings/{id}/ვარჯიშის წაშლაAdmin/Coach
-📝 Enrollments
+   Enrollments
 MethodEndpointDescriptionRolePOST/api/trainings/{id}/enroll/ვარჯიშზე ჩაწერაMemberPOST/api/trainings/{id}/cancel-enrollment/ჩაწერის გაუქმებაMemberGET/api/enrollments/my-enrollments/ჩემი ჩაწერებიMemberGET/api/trainings/{id}/enrollments/ვარჯიშის ჩაწერებიAdmin/Coach
-💳 Memberships
+   Memberships
 MethodEndpointDescriptionRoleGET/api/membership-plans/პაკეტების სიაAnyPOST/api/membership-plans/პაკეტის დამატებაAdminGET/api/membership-plans/{id}/პაკეტის დეტალებიAnyPUT/api/membership-plans/{id}/პაკეტის განახლებაAdminDELETE/api/membership-plans/{id}/პაკეტის წაშლაAdminGET/api/memberships/საწევროების სიაAdminPOST/api/memberships/საწევროს შექმნაAdminGET/api/memberships/my-membership/ჩემი საწევროMember
 
-🔑 ავტორიზაცია
+   ავტორიზაცია
 JWT Token-ები
 პროექტში გამოიყენება JWT (JSON Web Token) ავტორიზაციისთვის.
 Token ტიპები:
@@ -532,22 +546,54 @@ cURL-ით:
 bashcurl -H "Authorization: Bearer your_access_token" \
   http://localhost:8000/api/sports/
 
-👤 როლები და უფლებები
-🔴 Admin
+ როლები და უფლებები:  
+   Admin
 
 სრული წვდომა ყველაფერზე
 მომხმარებლების მართვა
 სპორტების, ვარჯიშების, საწევროების მართვა
 
-🟡 Coach
+   Coach
 
 ვარჯიშების შექმნა და მართვა
 საკუთარი ვარჯიშების ჩაწერების ნახვა
 მონაწილეთა დასწრების აღრიცხვა
 
-🟢 Member
+   Member
 
 ვარჯიშებზე ჩაწერა/გაუქმება
 საკუთარი ჩაწერების ნახვა
 საკუთარი საწევროს ნახვა
 პროფილის რედაქტირება
+
+## 🐳 Docker-ით გაშვება
+
+### Development
+
+1. **Container-ების გაშვება:**
+```bash
+   docker-compose up -d
+```
+
+2. **Superuser შექმნა:**
+```bash
+   docker-compose exec web python manage.py createsuperuser
+```
+
+3. **ბრაუზერში გახსენი:** http://localhost:8000/
+4. 4. **Container-ების გაჩერება:**
+```bash
+   docker-compose down
+```
+
+### Production
+```bash
+docker-compose -f docker-compose.prod.yml up -d --build
+```
+
+### სასარგებლო ბრძანებები
+
+- **Logs:** `docker-compose logs -f`
+- **Shell:** `docker-compose exec web bash`
+- **Migrations:** `docker-compose exec web python manage.py migrate`
+- **Django Shell:** `docker-compose exec web python manage.py shell`
